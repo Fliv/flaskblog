@@ -10,7 +10,7 @@ class AdminIndexView(AdminIndexView):
 
     @expose('/')
     def index(self):
-        if not current_user.is_authenticated():
+        if not current_user.is_authenticated:
             return redirect(url_for('.login'))
         return super(AdminIndexView, self).index()
 
@@ -21,7 +21,7 @@ class AdminIndexView(AdminIndexView):
             user = form.get_user()
             login_user(user)
 
-        if current_user.is_authenticated():
+        if current_user.is_authenticated:
             return redirect(url_for('.index'))
         # link = '<p>Don\'t have an account? <a href="' + url_for('.register_view') + '">Click here to register.</a></p>'
         self._template_args['form'] = form
@@ -44,7 +44,7 @@ class AdminUserView(sqla.ModelView):
     column_labels = dict(user_id='Id', user_name='Name', user_qq='QQ', user_mail='Mail', password='Password')
 
     def is_accessible(self):
-        return current_user.is_authenticated()
+        return current_user.is_authenticated
 
 
 # Define wtforms widget and field
@@ -81,7 +81,7 @@ class AdminPostView(sqla.ModelView):
     edit_template = 'admin/edit_post.html'
 
     def is_accessible(self):
-        return current_user.is_authenticated()
+        return current_user.is_authenticated
 
 
 class AdminCategoryView(sqla.ModelView):
@@ -104,7 +104,7 @@ class AdminCategoryView(sqla.ModelView):
         cat_description=dict(label='Category Description', validators=[validators.required()]))
 
     def is_accessible(self):
-        return current_user.is_authenticated()
+        return current_user.is_authenticated
 
 
 class AdminBlogrollView(sqla.ModelView):
@@ -127,7 +127,7 @@ class AdminBlogrollView(sqla.ModelView):
         cat_description=dict(label='Blogroll Url', validators=[validators.required()]))
 
     def is_accessible(self):
-        return current_user.is_authenticated()
+        return current_user.is_authenticated
 
 
 
